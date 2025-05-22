@@ -9,9 +9,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.21",
     "next": "^13.0.0",
+    "postcss": "^8.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "tailwindcss": "^4.1.7",
     "xlsx": "^0.18.5"
   }
 }
