@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3f37c9',
+                        success: '#4caf50',
+                        error: '#f44336',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .option-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-item.selected {
+            border-color: #4361ee;
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .option-item.correct {
+            border-color: #4caf50;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .option-item.incorrect {
+            border-color: #f44336;
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-primary text-white py-3 text-center mb-4 shadow-md">
+        <h1 class="text-2xl font-bold mb-2">Test Platformasi</h1>
+        <p>Pedagogika Psixologiya yakuniy savollar</p>
+    </header>
+
+    <div class="container mx-auto max-w-5xl px-3 flex-1">
+        <div id="loading" class="flex justify-center items-center py-12 text-lg text-primary">
+            Savolllar yuklanmoqda...
+        </div>
+        
+        <div id="test-container" class="hidden">
+            <div class="flex justify-between items-center mb-3 bg-white p-2 rounded-lg shadow-md">
+                <div class="text-lg font-medium">
+                    Savol <span id="current-question">1</span> / <span id="total-questions">0</span>
+                </div>
+                <div class="text-lg font-medium">
+                    Vaqt: <span id="timer">00:00</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg p-4 shadow-md mb-4">
+                <div class="text-lg mb-4 leading-relaxed" id="question-text"></div>
+                <div id="options-container" class="flex flex-col gap-4"></div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button id="prev-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed text-sm">
+                    « Oldingi
+                </button>
+                <button id="next-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed text-sm">
+                    Keyingi »
+                </button>
+                <button id="finish-btn" class="hidden bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors text-sm">
+                    Testni yakunlash
+                </button>
+            </div>
+        </div>
+        
+        <div id="results-container" class="hidden bg-white rounded-lg p-6 shadow-md">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold">Test natijalari</h2>
+            </div>
+            
+            <div class="flex justify-around bg-gray-100 p-5 rounded-lg mb-6">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary" id="total-stat">0</div>
+                    <div class="text-sm text-gray-600">Jami savollar</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary" id="answered-stat">0</div>
+                    <div class="text-sm text-gray-600">Javob berilgan</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary" id="correct-stat">0</div>
+                    <div class="text-sm text-gray-600">To'g'ri javoblar</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary" id="percentage-stat">0%</div>
+                    <div class="text-sm text-gray-600">Foiz</div>
+                </div>
+            </div>
+            
+            <button id="restart-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors mb-6 text-sm">
+                Testni qaytadan boshlash
+            </button>
+            
+            <div id="results-questions" class="mt-8"></div>
+        </div>
+    </div>
+    
+    <footer class="bg-primary text-white text-center py-2 mt-auto shadow-inner text-sm">
+        &copy; 2025 Test Platformasi
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
